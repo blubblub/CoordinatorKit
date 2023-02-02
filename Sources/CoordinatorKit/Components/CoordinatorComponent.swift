@@ -8,7 +8,6 @@
 
 import Foundation
 
-// TODO: Move this into a coordinator library!
 protocol CoordinatorComponentComposable {
     var components: [CoordinatorComponent] { get }
     func add(component: CoordinatorComponent)
