@@ -18,3 +18,14 @@ public protocol Coordinator: Coordinating {
     var parentCoordinator: Coordinator? { get }
     var rootViewController: UIViewController { get }
 }
+
+extension UIViewController {
+    /// First Coordinator in UIViewController chain, starting with self
+    public var coordinator: Coordinating? {
+        if let coordinator = (self as? CoordinatorInitializable)?.parentCoordinator {
+            return coordinator
+        } else {
+            return (parent ?? presentingViewController)?.coordinator
+        }
+    }
+}
