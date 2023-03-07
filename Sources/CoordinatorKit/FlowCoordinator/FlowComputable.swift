@@ -15,5 +15,8 @@ public protocol FlowComputable {
     /// Returns view controller based on FlowState
     /// - Parameter state: state of flow.
     /// - Returns: View controller that represents state.
-    func viewController(for state: FlowState) -> UIViewController
+    func viewControllers(for state: FlowState) -> [UIViewController]
 }
+
+
+ 

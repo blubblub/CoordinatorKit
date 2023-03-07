@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol CoordinatorComponentComposable {
+public protocol CoordinatorComponentComposable {
     var components: [CoordinatorComponent] { get }
     func add(component: CoordinatorComponent)
     func component<T: CoordinatorComponent>(_ type: T.Type) -> T
 }
 
-protocol CoordinatorComponent {
+public protocol CoordinatorComponent {
     /// Coordinator should ask component first without destructive action,
     /// if the action can be handled.
     func canHandleMessage(message: CoordinatorMessageable, with coordinator: Coordinator) -> Bool
