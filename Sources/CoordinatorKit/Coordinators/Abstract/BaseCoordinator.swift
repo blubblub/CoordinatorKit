@@ -19,7 +19,7 @@ open class BaseCoordinator: NSObject, Coordinator {
     }
     
     // MARK: - Initialization
-    init(window: UIWindow) {
+    public init(window: UIWindow) {
         self.window = window
     }
     
