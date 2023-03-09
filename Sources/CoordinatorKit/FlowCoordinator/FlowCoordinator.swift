@@ -15,9 +15,9 @@ public enum PresentType {
 }
 
 /// A Coordinator that knows how to compute flow based on state.
-public protocol FlowCoordinator {
-    var flow: FlowComputable { get }
-    var state: FlowState { get }
+public protocol FlowCoordinator: FlowComputable {
+    var flow: FlowPresentable { get }
+    
     func triggerFlow(animated: Bool, type: PresentType)
 }
 

@@ -9,14 +9,16 @@
 import Foundation
 import UIKit
 
-/// Compute view controller based on state
 public protocol FlowComputable {
+    func computeState() -> FlowState?
+}
+
+public protocol FlowPresentable {
     
     /// Returns view controller based on FlowState
     /// - Parameter state: state of flow.
     /// - Returns: View controller that represents state.
     func viewControllers(for state: FlowState) -> [UIViewController]
 }
-
 
  
