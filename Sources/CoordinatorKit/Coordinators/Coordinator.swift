@@ -18,17 +18,28 @@ public protocol Coordinator: Coordinating {
     var parentCoordinator: Coordinator? { get }
     var window: UIWindow { get }
     
-    // Optionally implementchild coordinators.
+    // Optionally implement child coordinators.
+    var childCoordinators: [Coordinator] { get }
+    
     func add(child: Coordinator)
+    func remove(child: Coordinator)
 }
 
 public extension Coordinator {
+    
     var parentCoordinator: Coordinator? {
         return nil
-        
+    }
+    
+    var childCoordinators: [Coordinator] {
+        return []
     }
     
     func add(child: Coordinator) {
+        
+    }
+    
+    func remove(child: Coordinator) {
         
     }
 }
