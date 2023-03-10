@@ -14,8 +14,18 @@ open class BaseCoordinator: NSObject, Coordinator {
     // MARK: - Coordinator
     public private(set) var window: UIWindow
     
+    public private(set) var childCoordinators: [Coordinator] = []
+    
     open func send(message: CoordinatorMessageable) {
         
+    }
+    
+    open func add(child: Coordinator) {
+        childCoordinators.append(child)
+    }
+    
+    open func remove(child: Coordinator) {
+        childCoordinators.removeAll(where: { $0 === child })
     }
     
     // MARK: - Initialization
