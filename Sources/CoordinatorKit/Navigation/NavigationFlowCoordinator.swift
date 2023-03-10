@@ -59,10 +59,19 @@ open class NavigationFlowCoordinator : BaseComponentCoordinator, FlowCoordinator
         else {
             // We're dismissing, so we need to insert the view controllers into the array to simulate pop
             var originalViewControllers = navigationController.viewControllers
+            
             originalViewControllers.insert(contentsOf: viewControllers, at: 0)
-
-            navigationController.setViewControllers(originalViewControllers, animated: false)
-            navigationController.setViewControllers(viewControllers, animated: animated)
+            
+            let uniqueControllers = Set(originalViewControllers)
+            
+            // There's a view controller in there twice.
+            if (uniqueControllers.count != originalViewControllers.count) {
+                navigationController.setViewControllers(viewControllers, animated: animated)
+            }
+            else {
+                navigationController.setViewControllers(originalViewControllers, animated: false)
+                navigationController.setViewControllers(viewControllers, animated: animated)
+            }
         }
     }
 }
