@@ -43,3 +43,7 @@ public extension UIViewController {
         }
     }
 }
+
+public protocol ViewControllerCoordinator {
+    var rootViewController: UIViewController { get }
+}
