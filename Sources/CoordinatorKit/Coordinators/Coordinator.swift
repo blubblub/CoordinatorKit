@@ -44,6 +44,11 @@ public extension UIViewController {
     }
 }
 
+
+/// A Coordinator that exposes view controller, but the window management must be
+/// handled by it's parent coordinator
 public protocol ViewControllerCoordinator {
+    var parentCoordinator: Coordinator? { get }
+    
     var rootViewController: UIViewController { get }
 }
