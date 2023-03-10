@@ -15,7 +15,8 @@ import UIKit
 /// While handling message make sure the sender is what you expect, because you might get message from another child Coordinator or UIViewController that you are not aware of.
 /// When a child Coordinator is done it should always send a message to it's parent to remove it.
 public protocol Coordinator: Coordinating {
-    var parentCoordinator: Coordinator? { get }
+    var parentCoordinator: Coordinator? { get set }
+    
     var window: UIWindow { get }
     
     // Optionally implement child coordinators.

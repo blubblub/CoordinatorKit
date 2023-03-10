@@ -12,6 +12,8 @@ import UIKit
 open class BaseCoordinator: NSObject, Coordinator {
     
     // MARK: - Coordinator
+    public weak var parentCoordinator: Coordinator?
+    
     public private(set) var window: UIWindow
     
     public private(set) var childCoordinators: [Coordinator] = []
@@ -22,15 +24,25 @@ open class BaseCoordinator: NSObject, Coordinator {
     
     open func add(child: Coordinator) {
         childCoordinators.append(child)
+        
+        child.parentCoordinator = self
     }
     
     open func remove(child: Coordinator) {
         childCoordinators.removeAll(where: { $0 === child })
+        
+        child.parentCoordinator = nil
     }
     
     // MARK: - Initialization
-    public init(window: UIWindow) {
+    public init(window: UIWindow, parent: Coordinator? = nil) {
         self.window = window
+        self.parentCoordinator = parent
+    }
+    
+    public init(parent: Coordinator) {
+        self.window = parent.window
+        self.parentCoordinator = parent
     }
     
     // MARK: - Public Methods
