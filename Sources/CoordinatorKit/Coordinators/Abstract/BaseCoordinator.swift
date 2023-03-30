@@ -14,7 +14,7 @@ open class BaseCoordinator: NSObject, Coordinator {
     // MARK: - Coordinator
     public weak var parentCoordinator: Coordinator?
     
-    public private(set) var window: UIWindow
+    open var window: UIWindow
     
     public private(set) var childCoordinators: [Coordinator] = []
     
