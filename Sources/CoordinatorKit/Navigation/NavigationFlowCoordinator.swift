@@ -23,7 +23,6 @@ open class NavigationFlowCoordinator : BaseComponentCoordinator, FlowCoordinator
     public private(set) var navigationController: UINavigationController
     public private(set) var flow: FlowPresentable
     
-    
     // MARK: - Initialization
     public init(window: UIWindow, navigationController: UINavigationController, flow: FlowPresentable) {
         self.navigationController = navigationController

@@ -20,5 +20,3 @@ public protocol FlowPresentable {
     /// - Returns: View controller that represents state.
     func viewControllers(for state: FlowState) -> [UIViewController]
 }
-
- 
