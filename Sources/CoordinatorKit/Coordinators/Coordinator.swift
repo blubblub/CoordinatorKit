@@ -59,6 +59,16 @@ public extension Coordinator {
         
         return nil
     }
+    
+    func findParent<T: Coordinator>(of type: T.Type) -> T? {
+        // Check if current parent is of type we're looking for.
+        if let parent = parentCoordinator as? T {
+            return parent
+        }
+        
+        // Propagate parent upwards.
+        return parentCoordinator?.findParent(of: type)
+    }
 }
 
 

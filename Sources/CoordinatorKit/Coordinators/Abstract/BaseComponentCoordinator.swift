@@ -22,6 +22,8 @@ open class BaseComponentCoordinator: BaseCoordinator, CoordinatorComponentCompos
         return components.first(where: { component in component is T }) as! T
     }
     
+    
+    
     // MARK: - Coordinator
     
     open override func send(message: CoordinatorMessageable) {
@@ -39,5 +41,19 @@ open class BaseComponentCoordinator: BaseCoordinator, CoordinatorComponentCompos
     
     open func unhandled(message: CoordinatorMessageable) {
         print("Unhandled message: \(message)")
+    }
+}
+
+// Parent chain component support
+public extension Coordinator {
+    func findComponent<T: CoordinatorComponent>(of type: T.Type) -> T? {
+        if let selfComponentComposable = self as? CoordinatorComponentComposable {
+            // Check if we have the component, otherwise, go to the parent.
+            if let component = selfComponentComposable.components.first(where: { component in component is T }) as? T {
+                return component
+            }
+        }
+        
+        return parentCoordinator?.findComponent(of: type)
     }
 }
