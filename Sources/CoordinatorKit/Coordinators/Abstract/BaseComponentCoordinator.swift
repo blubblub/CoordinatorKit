@@ -22,8 +22,6 @@ open class BaseComponentCoordinator: BaseCoordinator, CoordinatorComponentCompos
         return components.first(where: { component in component is T }) as! T
     }
     
-    
-    
     // MARK: - Coordinator
     
     open override func send(message: CoordinatorMessageable) {
