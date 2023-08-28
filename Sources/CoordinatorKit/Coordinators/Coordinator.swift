@@ -45,6 +45,23 @@ public extension Coordinator {
     }
 }
 
+public extension Coordinator {
+    func findChild<T: Coordinator>(of type: T.Type) -> T? {
+        
+        for c in childCoordinators {
+            if c is T {
+                return c as? T
+            }
+            
+            let result = c.findChild(of: type)
+            if result != nil { return result }
+        }
+        
+        return nil
+    }
+}
+
+
 public extension UIViewController {
     /// First Coordinator in UIViewController chain, starting with self
     var coordinator: Coordinating? {

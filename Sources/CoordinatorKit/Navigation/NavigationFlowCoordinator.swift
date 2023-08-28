@@ -19,7 +19,7 @@ public struct TriggerFlowMessage: CoordinatorMessageable {
     }
 }
 
-open class NavigationFlowCoordinator : BaseComponentCoordinator, FlowCoordinator {
+open class NavigationFlowCoordinator : BaseComponentCoordinator, FlowCoordinator, FlowComputable {
     public private(set) var navigationController: UINavigationController
     public private(set) var flow: FlowPresentable
     
