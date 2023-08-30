@@ -23,12 +23,19 @@ open class BaseCoordinator: NSObject, Coordinator {
     }
     
     open func add(child: Coordinator) {
+        guard child !== self else {
+            fatalError("Cannot add yourself as a child.")
+        }        
         childCoordinators.append(child)
         
         child.parentCoordinator = self
     }
     
     open func remove(child: Coordinator) {
+        guard child !== self else {
+            fatalError("Cannot remove yourself as a child.")
+        }
+        
         childCoordinators.removeAll(where: { $0 === child })
         
         child.parentCoordinator = nil

@@ -10,5 +10,5 @@ import Foundation
 
 /// UIViewControllers that are owned by Coordinator should implement this and hold a weak reference to their Coordinator
 public protocol CoordinatorInitializable: AnyObject {
-    var parentCoordinator: Coordinating? { get }
+    var parentCoordinator: Coordinating? { get set }
 }

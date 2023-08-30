@@ -91,3 +91,28 @@ public protocol ViewControllerCoordinator {
     
     var rootViewController: UIViewController { get }
 }
+
+/// Adds ability to present child coordinators
+public extension ViewControllerCoordinator {
+    func present(child: Coordinator & ViewControllerCoordinator, animated: Bool) {
+        if let selfCoordinator = self as? Coordinator {
+            selfCoordinator.add(child: child)
+        }
+        
+        child.rootViewController.modalPresentationStyle = .fullScreen
+                
+        rootViewController.present(child.rootViewController, animated: animated)
+    }
+    
+    func dismiss(child: Coordinator & ViewControllerCoordinator, animated: Bool) {
+        guard let selfCoordinator = self as? Coordinator & ViewControllerCoordinator else {
+            return
+        }
+        
+        selfCoordinator.remove(child: child)
+        
+        if selfCoordinator.rootViewController.presentedViewController === child.rootViewController {
+            child.rootViewController.dismiss(animated: animated)
+        }
+    }
+}
