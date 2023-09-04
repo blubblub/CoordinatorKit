@@ -94,25 +94,70 @@ public protocol ViewControllerCoordinator {
 
 /// Adds ability to present child coordinators
 public extension ViewControllerCoordinator {
-    func present(child: Coordinator & ViewControllerCoordinator, animated: Bool) {
-        if let selfCoordinator = self as? Coordinator {
-            selfCoordinator.add(child: child)
+    
+    /// Presents child coordinator as modal on self directly.
+    /// - Parameters:
+    ///   - child: view controller coordinator (also coordinator)
+    ///   - animated: if it should be animated.
+    ///   - transition: if there should be a transition for the animation.
+    ///   - completion: called when animation is completed.
+    func present(child: ViewControllerCoordinator, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
+        if let childCoordinator = child as? Coordinator, let selfCoordinator = self as? Coordinator {
+            selfCoordinator.add(child: childCoordinator)
         }
         
-        child.rootViewController.modalPresentationStyle = .fullScreen
-                
-        rootViewController.present(child.rootViewController, animated: animated)
+        present(child: child.rootViewController, on: rootViewController, animated: animated, transition: transition, completion: completion)
     }
     
-    func dismiss(child: Coordinator & ViewControllerCoordinator, animated: Bool) {
-        guard let selfCoordinator = self as? Coordinator & ViewControllerCoordinator else {
-            return
+    /// Similar as Present above, but it will modally present it on the lowest presented VC.
+    /// It will interatively loop until on currently owned VC, until is no more presented VC.
+    /// The last active VC will present the controller.
+    /// - Parameters:
+    ///   - child: view controller coordinator (also coordinator)
+    ///   - animated: if it should be animated.
+    ///   - transition: if there should be a transition for the animation.
+    ///   - completion: called when animation is completed.
+    func presentInHierarchy(child: ViewControllerCoordinator, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
+        if let childCoordinator = child as? Coordinator, let selfCoordinator = self as? Coordinator {
+            selfCoordinator.add(child: childCoordinator)
         }
         
-        selfCoordinator.remove(child: child)
+        var currentVC = rootViewController
         
-        if selfCoordinator.rootViewController.presentedViewController === child.rootViewController {
-            child.rootViewController.dismiss(animated: animated)
+        while currentVC.presentedViewController != nil {
+            currentVC = currentVC.presentedViewController!
         }
+        
+        present(child: child.rootViewController, on: currentVC, animated: animated, transition: transition, completion: completion)
+    }
+    
+    func presentInHierarchy(viewController: UIViewController, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
+        
+        var currentVC = rootViewController
+        
+        while currentVC.presentedViewController != nil {
+            currentVC = currentVC.presentedViewController!
+        }
+        
+        present(child: viewController, on: currentVC, animated: animated, transition: transition, completion: completion)
+    }
+    
+    func dismiss(child: ViewControllerCoordinator, animated: Bool, completion: (() -> Void)? = nil) {
+        if let selfCoordinator = self as? Coordinator, let childCoordinator = child as? Coordinator {
+            selfCoordinator.remove(child: childCoordinator)
+        }
+        
+        child.rootViewController.dismiss(animated: animated, completion: completion)
+    }
+    
+    private func present(child childVC: UIViewController, on viewController: UIViewController, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
+        
+        childVC.modalPresentationStyle = .fullScreen
+        
+        if animated {
+            childVC.modalTransitionStyle = transition
+        }
+        
+        viewController.present(childVC, animated: animated)
     }
 }
