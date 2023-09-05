@@ -14,6 +14,15 @@ public enum BasicMessage: CoordinatorMessageable {
     case done(Any)
     /// Notifies that you cancelled without completing your work (Coordinator should figure out what to do next)
     case cancel(Any)
+    
+    public func copy(with sender: Any) -> BasicMessage {
+        switch self {
+        case .done:
+            return BasicMessage.done(sender)
+        case .cancel:
+            return BasicMessage.cancel(sender)
+        }
+    }
 }
 
 public extension Coordinating {

@@ -45,6 +45,7 @@ public extension Coordinator {
     }
 }
 
+// Child and parent convenience methods
 public extension Coordinator {
     func findChild<T: Coordinator>(of type: T.Type) -> T? {
         
