@@ -33,7 +33,15 @@ open class NavigationFlowCoordinator : BaseComponentCoordinator, FlowCoordinator
     
     open override func unhandled(message: CoordinatorMessageable) {
         if let msg = message as? TriggerFlowMessage {
-            triggerFlow(animated: msg.animated, type: msg.presentType)
+            
+            if let presentedVC = navigationController.presentedViewController {
+                triggerFlow(animated: false, type: msg.presentType)
+                presentedVC.dismiss(animated: msg.animated)
+            }
+            else {
+                triggerFlow(animated: msg.animated, type: msg.presentType)
+            }
+            
             return
         }
         
