@@ -2,9 +2,32 @@
 
 Navigation using Coordinators in Swift for UIKit and SwiftUI apps. The pattern forces UI action code to call Coordinator instead of having logic for flow between different screens.
 
+Framework is as simple as possible and easy to learn.
+
 It is used in production by [Blub Blub](https://speechblubs.com) in:
 - [Speech Blubs](https://apps.apple.com/us/app/speech-blubs-language-therapy/id1239522573)
 - [Speech Blubs Pro](https://apps.apple.com/us/app/speech-blubs-pro-made-for-slps/id1669028733)
+
+# Installation
+
+Platform support:
+- iOS 14+
+- iPadOS 14+
+- macOS 11+
+
+## Swift Package Manager
+
+In Xcode go to File → Packages → Update to Latest Package Versions and use url:
+
+https://github.com/blubblub/CoordinatorKit
+
+Add it to the dependencies value of your Package.swift:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/blubblub/CoordinatorKit", .upToNextMajor(from: "1.0.0")),
+]
+```
 
 # Getting Started
 
@@ -28,7 +51,9 @@ The upper example tells Coordinator that the view controller considers itself co
 
 ## Establishing Coordinators in your app
 
-How 
+How to add CoordinatorKit to your app?
+
+1. Create a base coordinator.
 
 ```swift
 
@@ -80,10 +105,18 @@ extension UIViewController {
 }
 ```
 
+# Contributing
+
+We welcome any kind of pull requests. If you have a problem, open an issue! :)
+
+Something is missing? Open a pull request!
+
 # Authors
 
-Dal Rupnik
-Jure Lajlar
+The framework is maintained by [Blub Blub Inc.](https://speechblubs.com)
+
+[Dal Rupnik](https://github.com/legoless)
+[Jure Lajlar](https://github.com/jlajlar)
 
 # License
 
