@@ -14,7 +14,11 @@ This effectively breaks all dependencies between screens and allows for easy UI 
 
 For example:
 
-The base of CoordinatorKit are the following protocols:
+
+
+## Building Blocks
+
+ The base of CoordinatorKit are the following protocols:
 
 ## `CoordinatorMessagable` 
 Defines protocol that all coodrinator
@@ -25,9 +29,22 @@ Defines protocol that all coodrinator
 
 ## `Coordinator`
 
+## Coordinator Implementations
+
+## `BaseCoordinator`
+
+## `BaseComponentCoordinator`
+
+# Flow Coordinators
+
+## `FlowCoordinator`
+
+## `BuildableFlowCoordinator`
 
 
-## UIKit Support
+# SwiftUI Support
+
+# UIKit Support
 
 ```swift
 extension UIViewController {
