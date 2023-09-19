@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
 }
 
 ```
-The upper example tells Coordinator that the view controller considers itself completed. It is up to Coordinator to do any other actions, open new screens, etc.
+The upper example tells Coordinator that the view controller considers itself completed. It is up to Coordinator to do any other actions, build and launch new screens, etc.
 
 ## Establishing Coordinators in your app
 
@@ -56,8 +56,38 @@ How to add CoordinatorKit to your app?
 1. Create a base coordinator.
 
 ```swift
+import CoordinatorKit
+
+class AppCoordinator: BaseCoordinator {
+    init(window: UIWindow) {
+        super.init(window: window)
+
+        // Set Root View Controller to window that is managed by Coordinator
+    }
+}
 
 ```
+
+2. Initialize on app launch
+
+```swift
+class AppDelegate: UIApplicationDelegate {
+    var window: UIWindow?
+    var appCoordinator: AppCoordinator! = nil
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        guard let window = window else {
+            return
+        }
+
+        appCoordinator = AppCoordinator(window: window)
+    }
+}
+```
+
+If your app initializes with scene, it is your choice whether to have each scene managed by a separate coordinator chain and one on top.
+
+_It is recommended that one coordinator receives messages on top, this also makes it easy for debugging messages that land in._
 
 
 ## Building Blocks
@@ -93,6 +123,10 @@ enum BasicMessage : CoordinatorMessagable {
 ## `FlowCoordinator`
 
 ## `BuildableFlowCoordinator`
+
+# Convenience methods
+
+
 
 
 # SwiftUI Support
