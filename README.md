@@ -174,7 +174,7 @@ CoordinatorKit provides several base coordinator implementations.
 
 ## `BaseCoordinator`
 
-`BaseCoordinator`` is a simple Coordinator base that manages an `UIWindow` and child coordinators.
+`BaseCoordinator` is a simple Coordinator base that manages an `UIWindow` and child coordinators.
 
 ## `BaseComponentCoordinator`
 
@@ -302,9 +302,9 @@ Something is missing? Open a pull request!
 
 The framework is maintained by [Blub Blub Inc.](https://speechblubs.com)
 
-[Dal Rupnik](https://github.com/legoless)
-
-[Jure Lajlar](https://github.com/jlajlar)
+Authors:
+- [Dal Rupnik](https://github.com/legoless)
+- [Jure Lajlar](https://github.com/jlajlar)
 
 # License
 
