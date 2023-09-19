@@ -8,12 +8,20 @@ It is used in production by Blub Blub in:
 
 # Getting Started
 
+Coordinators are objects that own larger sections of an application (for example: Onboarding, Login flow). Their main responsibility is to implement
+
 The base of CoordinatorKit are the following protocols:
 
-- `CoordinatorMessagable`
-- `Coordinating`
-- `CoordinatorInitializable`
-- `Coordinator`
+## `CoordinatorMessagable` 
+Defines protocol that all coodrinator
+
+## `Coordinating` - defines protocol that is used for communication ()
+
+## `CoordinatorInitializable`
+
+## `Coordinator`
+
+
 
 ## UIKit Support
 
