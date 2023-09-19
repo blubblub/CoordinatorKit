@@ -202,6 +202,7 @@ Most common scenario is to propagate the message to parent coordinator.
 open func unhandled(message: CoordinatorMessageable) {
     parentCoordinator?.send(message: message)
 }
+```
 
 # Flow Coordinators
 
