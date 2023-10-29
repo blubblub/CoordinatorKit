@@ -15,6 +15,18 @@ public protocol ViewControllerCoordinator {
     var rootViewController: UIViewController { get }
 }
 
+public struct ViewControllerTransition {
+    public init(transitionStyle: UIModalTransitionStyle = .coverVertical, modalPresentationStyle: UIModalPresentationStyle = .fullScreen, transitioningDelegate: UIViewControllerTransitioningDelegate? = nil) {
+        self.transitionStyle = transitionStyle
+        self.modalPresentationStyle = modalPresentationStyle
+        self.transitioningDelegate = transitioningDelegate
+    }
+    
+    let transitionStyle: UIModalTransitionStyle
+    let modalPresentationStyle: UIModalPresentationStyle
+    let transitioningDelegate: UIViewControllerTransitioningDelegate?
+}
+
 /// Adds ability to present child coordinators
 public extension ViewControllerCoordinator {
     
@@ -24,7 +36,7 @@ public extension ViewControllerCoordinator {
     ///   - animated: if it should be animated.
     ///   - transition: if there should be a transition for the animation.
     ///   - completion: called when animation is completed.
-    func present(child: ViewControllerCoordinator, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
+    func present(child: ViewControllerCoordinator, animated: Bool, transition: ViewControllerTransition = ViewControllerTransition(), completion: (() -> Void)? = nil) {
         if let childCoordinator = child as? Coordinator, let selfCoordinator = self as? Coordinator {
             selfCoordinator.add(child: childCoordinator)
         }
@@ -40,7 +52,7 @@ public extension ViewControllerCoordinator {
     ///   - animated: if it should be animated.
     ///   - transition: if there should be a transition for the animation.
     ///   - completion: called when animation is completed.
-    func presentInHierarchy(child: ViewControllerCoordinator, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
+    func presentInHierarchy(child: ViewControllerCoordinator, animated: Bool, transition: ViewControllerTransition = ViewControllerTransition(), completion: (() -> Void)? = nil) {
         if let childCoordinator = child as? Coordinator, let selfCoordinator = self as? Coordinator {
             selfCoordinator.add(child: childCoordinator)
         }
@@ -54,7 +66,7 @@ public extension ViewControllerCoordinator {
         present(child: child.rootViewController, on: currentVC, animated: animated, transition: transition, completion: completion)
     }
     
-    func presentInHierarchy(viewController: UIViewController, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
+    func presentInHierarchy(viewController: UIViewController, animated: Bool, transition: ViewControllerTransition = ViewControllerTransition(), completion: (() -> Void)? = nil) {
         
         var currentVC = rootViewController
         
@@ -65,21 +77,36 @@ public extension ViewControllerCoordinator {
         present(child: viewController, on: currentVC, animated: animated, transition: transition, completion: completion)
     }
     
-    func dismiss(child: ViewControllerCoordinator, animated: Bool, completion: (() -> Void)? = nil) {
+    func dismiss(child: ViewControllerCoordinator, animated: Bool, transition: ViewControllerTransition? = nil, completion: (() -> Void)? = nil) {
         if let selfCoordinator = self as? Coordinator, let childCoordinator = child as? Coordinator {
             selfCoordinator.remove(child: childCoordinator)
         }
         
+        // If dismiss wants to override the transition.
+        if let transition = transition {
+            child.rootViewController.modalPresentationStyle = transition.modalPresentationStyle
+            
+            if animated {
+                child.rootViewController.modalTransitionStyle = transition.transitionStyle
+                
+                if let transitioningDelegate = transition.transitioningDelegate {
+                    child.rootViewController.transitioningDelegate = transitioningDelegate
+                }
+            }
+        }
+        
         child.rootViewController.dismiss(animated: animated, completion: completion)
     }
-    
-    
-    private func present(child childVC: UIViewController, on viewController: UIViewController, animated: Bool, transition: UIModalTransitionStyle = .coverVertical, completion: (() -> Void)? = nil) {
         
-        childVC.modalPresentationStyle = .fullScreen
+    private func present(child childVC: UIViewController, on viewController: UIViewController, animated: Bool, transition: ViewControllerTransition = ViewControllerTransition(), completion: (() -> Void)? = nil) {
+        
+        childVC.modalPresentationStyle = transition.modalPresentationStyle
         
         if animated {
-            childVC.modalTransitionStyle = transition
+            childVC.modalTransitionStyle = transition.transitionStyle
+            if let transitioningDelegate = transition.transitioningDelegate {
+                childVC.transitioningDelegate = transitioningDelegate
+            }
         }
         
         viewController.present(childVC, animated: animated)
