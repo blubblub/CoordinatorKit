@@ -15,7 +15,7 @@ public enum ReloadOptions {
 /// Once Coordinator receives this message, it should reload based on options
 public struct ReloadMessage : CoordinatorMessageable {
     public var animated = true
-    public var options = ReloadOptions.all
+    public var options = ReloadOptions.ignoreChildren
     public var metadata: Any? = nil
     
     public init(animated: Bool = true, options: ReloadOptions = ReloadOptions.all, metadata: Any? = nil) {

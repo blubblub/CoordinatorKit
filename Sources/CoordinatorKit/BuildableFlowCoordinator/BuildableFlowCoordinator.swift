@@ -131,7 +131,7 @@ open class BuildableFlowCoordinator : BaseComponentCoordinator, FlowCoordinator 
         
         // If there are no child coordinators, send to coordinator directly.
         if options != .onlyChildren {
-            let animated = rootViewController.view?.window != nil
+            //let animated = rootViewController.view?.window != nil
 
             send(message: TriggerFlowMessage(animated: animated))
         }
