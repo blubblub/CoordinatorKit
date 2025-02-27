@@ -14,6 +14,9 @@ public enum BasicMessage: CoordinatorMessageable {
     case done(Any)
     /// Notifies that you cancelled without completing your work (Coordinator should figure out what to do next)
     case cancel(Any)
+
+    // Notifies about skip action (Coordinator should figure out what to do next)
+    case skip(Any)
     
     public func copy(with sender: Any) -> BasicMessage {
         switch self {
@@ -21,6 +24,8 @@ public enum BasicMessage: CoordinatorMessageable {
             return BasicMessage.done(sender)
         case .cancel:
             return BasicMessage.cancel(sender)
+        case .skip:
+            return BasicMessage.skip(sender)
         }
     }
 }
