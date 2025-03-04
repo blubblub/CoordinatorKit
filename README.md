@@ -9,9 +9,9 @@ It is used in production by [Blub Blub](https://speechblubs.com) in:
 # Installation
 
 Platform support:
-- iOS 14+
-- iPadOS 14+
-- macOS 11+
+- iOS 15+
+- iPadOS 15+
+- macOS 12+
 
 ## Swift Package Manager
 
@@ -23,7 +23,7 @@ Add it to the dependencies of your Package.swift:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/blubblub/CoordinatorKit", .upToNextMajor(from: "1.0.0")),
+    .package(url: "https://github.com/blubblub/CoordinatorKit", .upToNextMajor(from: "2.0.0")),
 ]
 ```
 
