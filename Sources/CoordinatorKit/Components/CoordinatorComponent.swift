@@ -8,12 +8,14 @@
 
 import Foundation
 
+@MainActor
 public protocol CoordinatorComponentComposable {
     var components: [CoordinatorComponent] { get }
     func add(component: CoordinatorComponent)
     func component<T: CoordinatorComponent>(_ type: T.Type) -> T
 }
 
+@MainActor
 public protocol CoordinatorComponent {
     /// Coordinator should ask component first without destructive action,
     /// if the action can be handled.

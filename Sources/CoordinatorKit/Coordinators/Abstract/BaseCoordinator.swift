@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 open class BaseCoordinator: NSObject, Coordinator {
     
     // MARK: - Coordinator

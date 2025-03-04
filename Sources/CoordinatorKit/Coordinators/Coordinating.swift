@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 public protocol Coordinating: AnyObject {
     func send(message: CoordinatorMessageable)
 }

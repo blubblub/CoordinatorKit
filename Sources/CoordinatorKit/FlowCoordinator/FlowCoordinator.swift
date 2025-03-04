@@ -15,10 +15,12 @@ public enum PresentType {
 }
 
 /// A Coordinator that knows how to compute flow based on state.
+@MainActor
 public protocol FlowCoordinator {
     func triggerFlow(animated: Bool, type: PresentType)
 }
 
+@MainActor
 public extension FlowCoordinator {
     func presentFlow(animated: Bool) {
         triggerFlow(animated: animated, type: .present)

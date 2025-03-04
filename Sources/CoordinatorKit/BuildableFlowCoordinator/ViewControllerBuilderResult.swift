@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 public struct ViewControllerBuilderResult {
     public let viewController: UIViewController
     public let coordinator: Coordinator?

@@ -9,6 +9,7 @@
 import Foundation
 
 /// Immutable Flow State used to compute view controller.
+@MainActor
 public protocol FlowState {
     
 }

@@ -9,12 +9,14 @@ import UIKit
 
 /// A Coordinator that exposes view controller, but the window management must be
 /// handled by it's parent coordinator
+@MainActor
 public protocol ViewControllerCoordinator {
     var parentCoordinator: Coordinator? { get }
     
     var rootViewController: UIViewController { get }
 }
 
+@MainActor
 public struct ViewControllerTransition {
     public init(transitionStyle: UIModalTransitionStyle = .coverVertical, modalPresentationStyle: UIModalPresentationStyle = .fullScreen, transitioningDelegate: UIViewControllerTransitioningDelegate? = nil) {
         self.transitionStyle = transitionStyle
@@ -27,6 +29,7 @@ public struct ViewControllerTransition {
     let transitioningDelegate: UIViewControllerTransitioningDelegate?
 }
 
+@MainActor
 /// Adds ability to present child coordinators
 public extension ViewControllerCoordinator {
     
@@ -113,6 +116,7 @@ public extension ViewControllerCoordinator {
     }
 }
 
+@MainActor
 public extension Coordinator {
     func triggerFlowInChildren() {
         // Send the success message through all children.

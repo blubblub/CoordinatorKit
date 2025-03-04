@@ -9,10 +9,12 @@
 import Foundation
 import UIKit
 
+@MainActor
 public protocol FlowComputable {
     func computeState() -> FlowState?
 }
 
+@MainActor
 public protocol FlowPresentable {
     
     /// Returns view controller based on FlowState

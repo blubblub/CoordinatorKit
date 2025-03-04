@@ -9,5 +9,6 @@
 import Foundation
 
 /// Message Protocol, can be any type of message, used as a placeholder in the API.
+@MainActor
 public protocol CoordinatorMessageable {
 }
