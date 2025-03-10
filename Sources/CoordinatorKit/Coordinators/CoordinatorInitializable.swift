@@ -9,6 +9,7 @@
 import Foundation
 
 /// UIViewControllers that are owned by Coordinator should implement this and hold a weak reference to their Coordinator
+@MainActor
 public protocol CoordinatorInitializable: AnyObject {
     var parentCoordinator: Coordinating? { get set }
 }
