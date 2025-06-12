@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 public struct TriggerFlowMessage: CoordinatorMessageable {
     public var animated = true
     public var presentType: PresentType = .present
@@ -19,6 +20,7 @@ public struct TriggerFlowMessage: CoordinatorMessageable {
     }
 }
 
+@MainActor
 open class NavigationFlowCoordinator : BaseComponentCoordinator, FlowCoordinator, FlowComputable {
     public private(set) var navigationController: UINavigationController
     public private(set) var flow: FlowPresentable

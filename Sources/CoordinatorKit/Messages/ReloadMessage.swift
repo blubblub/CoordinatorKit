@@ -13,6 +13,7 @@ public enum ReloadOptions {
 }
 
 /// Once Coordinator receives this message, it should reload based on options
+@MainActor
 public struct ReloadMessage : CoordinatorMessageable {
     public var animated = true
     public var options = ReloadOptions.ignoreChildren

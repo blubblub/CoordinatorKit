@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 public struct SetUserActivityMessage: CoordinatorMessageable {
     public let userActivity: NSUserActivity?
     

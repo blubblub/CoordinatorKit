@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 open class BaseComponentCoordinator: BaseCoordinator, CoordinatorComponentComposable {
     
     // MARK: - CoordinatorComponentComposable
@@ -43,6 +44,7 @@ open class BaseComponentCoordinator: BaseCoordinator, CoordinatorComponentCompos
 }
 
 // Parent chain component support
+@MainActor
 public extension Coordinator {
     func findComponent<T: CoordinatorComponent>(of type: T.Type) -> T? {
         if let selfComponentComposable = self as? CoordinatorComponentComposable {

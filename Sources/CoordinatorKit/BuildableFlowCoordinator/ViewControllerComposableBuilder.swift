@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 open class ViewControllerComposableBuilder : ViewControllerBuildable {
     open var builders: [ViewControllerBuildable] = []
     

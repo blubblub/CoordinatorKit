@@ -48,6 +48,7 @@ public extension Coordinator {
 }
 
 // Child and parent convenience methods
+@MainActor
 public extension Coordinator {
     func findChild<T: Coordinator>(of type: T.Type) -> T? {
         
@@ -74,7 +75,7 @@ public extension Coordinator {
     }
 }
 
-
+@MainActor
 public extension UIViewController {
     /// First Coordinator in UIViewController chain, starting with self
     var coordinator: Coordinating? {
